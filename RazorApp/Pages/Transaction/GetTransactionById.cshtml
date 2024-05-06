@@ -1,0 +1,76 @@
+@page
+@model RazorApp.Pages.Transaction.GetTransactionByIdModel
+@{
+    ViewData["Title"] = "Transaction Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для страницы с деталями категории */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .Transaction-info {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .Transaction-info h2 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .Transaction-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .Transaction-info li {
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        @if (Model.Transaction != null)
+        {
+            <div class="Transaction-info">
+                <h2>Transaction Information</h2>
+                <ul>
+                    <li><strong>ID:</strong> @Model.Transaction.Id</li>
+                    <li><strong>FromAccountId:</strong> @Model.Transaction.FromAccountId</li>
+                    <li><strong>ToAccountId:</strong> @Model.Transaction.ToAccountId</li>
+                    <li><strong>Amount:</strong> @Model.Transaction.Amount</li>
+                    <li><strong>TransactionDate:</strong> @Model.Transaction.TransactionDate</li>
+                  </ul>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">Transaction not found.</div>
+        }
+
+        <a asp-page="/Transaction/GetTransactions" class="btn btn-secondary btn-back">Back to Transactions</a>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

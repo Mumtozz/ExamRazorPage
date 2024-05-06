@@ -1,0 +1,115 @@
+@page
+@model GetAccountsModel
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .Account-id {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="btn-container">
+        <a href="/Account/CreateAccount" class="btn btn-primary">Add Account</a>
+    </div>
+
+    <form method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" asp-for="Filter.AccountNumber" placeholder="Search by Account Number">
+        </div>
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
+
+    <ul>
+        @foreach (var Account in Model.Accounts)
+        {
+            <li>
+                <div>
+                    <span class="Account-id">ID: @Account.Id</span><br />
+                    <span><strong>Account Number:</strong> @Account.AccountNumber</span><br />
+                    <span><strong>CustomerId :</strong> @Account.CustomerId</span><br />
+                    <span><strong>Balance:</strong> @Account.Balance</span><br />
+                    <span><strong>type:</strong> @Account.Type</span><br />
+                   
+                </div>
+                <div class="btn-container">
+                    <a href="/Account/GetAccountById?id=@Account.Id" class="btn btn-info">View</a>
+                    <a asp-page="/Account/UpdateAccount" asp-route-id="@Account.Id" class="btn btn-primary">Update</a>
+                    <a href="/Account/DeleteAccount?id=@Account.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </li>
+        }
+    </ul>
+
+    <!-- Pagination -->
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination">
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.Filter.PageNumber == i ? "active" : "")">
+                            <a class="page-link" asp-page="./GetAccounts" asp-route-PageNumber="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+</body>
+</html>

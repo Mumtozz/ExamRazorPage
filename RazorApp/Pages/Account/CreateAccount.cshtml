@@ -1,0 +1,75 @@
+@page
+@model CreateAccountModel
+@{
+    ViewData["Title"] = "Create New Account";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title style="text-align: center">@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для страницы создания новой категории */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-cancel {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+
+    <div class="form-container">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="AccountDto.AccountNumber">Account Number:</label>
+                <input asp-for="AccountDto.AccountNumber" class="form-control"/>
+                <span asp-validation-for="AccountDto.AccountNumber" class="text-danger"></span>
+
+
+                <label asp-for="AccountDto.CustomerId">CustomerId:</label>
+                <input asp-for="AccountDto.CustomerId" class="form-control"/>
+                <span asp-validation-for="AccountDto.CustomerId" class="text-danger"></span>
+
+
+                <label asp-for="AccountDto.Balance">Balance:</label>
+                <input asp-for="AccountDto.Balance" class="form-control"/>
+                <span asp-validation-for="AccountDto.Balance" class="text-danger"></span>
+
+                <label asp-for="AccountDto.Type">Type:</label>
+                <input asp-for="AccountDto.Type" class="form-control"/>
+                <span asp-validation-for="AccountDto.Type" class="text-danger"></span>
+            </div>
+
+            <!-- Добавьте другие поля DTO здесь, если они есть -->
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            <a asp-page="/Account/GetAccounts" class="btn btn-secondary btn-cancel">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

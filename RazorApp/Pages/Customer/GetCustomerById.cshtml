@@ -1,0 +1,74 @@
+@page
+@model RazorApp.Pages.Customer.GetCustomerByIdModel
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Стили для страницы с деталями категории */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .Customer-info {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+        .Customer-info h2 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .Customer-info ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .Customer-info li {
+            margin-bottom: 10px;
+        }
+
+        .btn-back {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        @if (Model.Customer != null)
+        {
+            <div class="Customer-info">
+                <h2>Customer Information</h2>
+                <ul>
+                    <li><strong>ID:</strong> @Model.Customer.Id</li>
+                    <li><strong>Customer Name:</strong> @Model.Customer.CustomerName</li>
+                   
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">Customer not found.</div>
+        }
+
+        <a asp-page="/Customer/GetCustomers" class="btn btn-secondary btn-back">Back to Customers</a>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

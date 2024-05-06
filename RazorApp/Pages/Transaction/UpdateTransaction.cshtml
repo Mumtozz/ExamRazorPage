@@ -1,0 +1,45 @@
+@page
+@model RazorApp.Pages.Transaction.UpdateTransactionModel
+@{
+    ViewData["Title"] = "Update Transaction";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>@ViewData["Title"]</h1>
+
+        <form method="post">
+            <input type="hidden" asp-for="Transaction.Id" />
+
+            <div class="form-group">
+                <label asp-for="Transaction.FromAccountId"> FromAccountId:</label>
+                <input asp-for="Transaction.FromAccountId" class="form-control" />
+                <span asp-validation-for="Transaction.FromAccountId" class="text-danger"></span>
+
+                <label asp-for="Transaction.ToAccountId"> ToAccountId:</label>
+                <input asp-for="Transaction.ToAccountId" class="form-control" />
+                <span asp-validation-for="Transaction.ToAccountId" class="text-danger"></span>
+
+                <label asp-for="Transaction.Amount"> Amount:</label>
+                <input asp-for="Transaction.Amount" class="form-control" />
+                <span asp-validation-for="Transaction.Amount" class="text-danger"></span>
+
+                <label asp-for="Transaction.TransactionDate"> TransactionDate:</label>
+                <input asp-for="Transaction.TransactionDate" class="form-control" />
+                <span asp-validation-for="Transaction.TransactionDate" class="text-danger"></span>
+            </div>
+
+            <!-- Добавьте другие поля DTO здесь, если необходимо -->
+
+            <button type="submit" class="btn btn-primary">Update Transaction</button>
+            <a asp-page="/Transaction/GetCategories" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

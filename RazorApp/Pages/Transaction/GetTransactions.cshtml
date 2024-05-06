@@ -1,0 +1,137 @@
+@page
+@model GetTransactionModel
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>@ViewData["Title"]</title>
+    <a href="/Transaction/CreateTransaction" class="btn btn-primary">Add Transaction</a>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .Transaction-id,
+        .Transaction-FromAccountId,
+        .Transaction-ToAccountId .Transaction-Amount .Transaction-TransactionDate {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .Transaction-id {
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>@ViewData["Title"]</h1>
+
+
+    <ul>
+        @foreach (var Transaction in Model.Transactions)
+        {
+            <li>
+                <div>
+                    <span class="Transaction-id">ID:</span> @Transaction.Id <br />
+                    <span class="FromAccountId">FromAccountId:</span> @Transaction.FromAccountId <br />
+                    <span class="ToAccountId">ToAccountId:</span> @Transaction.ToAccountId <br />
+                    <span class="Amount">Amount:</span> @Transaction.Amount <br />
+                    <span class="TransactionDate">Type:</span> @Transaction.TransactionDate <br />
+                </div>
+                <div class="btn-container">
+                    <a href="/Transaction/GetTransactionById?id=@Transaction.Id" class="btn btn-info">View</a>
+                    <a asp-page="/Transaction/UpdateTransaction" asp-route-id="@Transaction.Id" class="btn btn-primary">Update</a>
+                    <a href="/Transaction/DeleteTransaction?id=@Transaction.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </li>
+        }
+    </ul>
+
+    @if (Model.TotalPages > 1)
+    {
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination">
+                    @for (var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.Filter.PageNumber == i ? "active" : "")"> <a class="page-link"
+                                asp-page="./GetTransactions" asp-route-PageNumber="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+
+</body>
+
+</html>
